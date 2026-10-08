@@ -75,11 +75,11 @@ const MarqueePage = async () => {
 
                 <p className="flex items-center">
                   {item.change.dir === "up" && (
-                    <FaCaretUp size={24} className="text-green-600" />
+                    <FaCaretUp size={24} className="text-red-600" />
                   )}
 
                   {item.change.dir === "down" && (
-                    <FaCaretDown size={24} className="text-red-600" />
+                    <FaCaretDown size={24} className="text-green-600" />
                   )}
 
                   {item.change.dir === "flat" && (
@@ -89,9 +89,9 @@ const MarqueePage = async () => {
                   <span
                     className={`font-bold ${
                       item.change.dir === "up"
-                        ? "text-green-600"
+                        ? "text-red-600"
                         : item.change.dir === "down"
-                          ? "text-red-600"
+                          ? "text-green-600"
                           : "text-gray-500"
                     }`}
                   >
