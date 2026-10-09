@@ -1,3 +1,4 @@
+
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import MarqueeText from "react-marquee-text";
 
@@ -25,12 +26,13 @@ export interface IType {
   markets: [];
 }
 
-const MarqueePage = async () => {
+const Marquee = async () => {
   // All products
-  const URL = "https://api.abcz.workers.dev/api/bazardor/products";
+  const URL =
+    "https://api.abcz.workers.dev/api/bazardor/products";
 
   const res = await fetch(URL);
-  const data = await res.json();
+  const data: IType[] = await res.json();
 
   const unitBn: Record<string, string> = {
     kg: "কেজি",
@@ -43,68 +45,100 @@ const MarqueePage = async () => {
     maund: "মণ",
   };
 
-  const convertToBanglaNumber = (value: number | string) => {
-    return String(value).replace(/\d/g, (digit) => "০১২৩৪৫৬৭৮৯"[Number(digit)]);
+  const convertToBanglaNumber = (
+    value: number | string,
+  ) => {
+    return String(value).replace(
+      /\d/g,
+      (digit) => "০১২৩৪৫৬৭৮৯"[Number(digit)],
+    );
   };
 
-  // Hover background based on price direction
-  const hoverBg: Record<IChange["dir"], string> = {
-    up: "hover:bg-green-200",
-    down: "hover:bg-red-200",
-    flat: "hover:bg-gray-200",
+  // Colors based on price direction
+  const priceStyles: Record<
+    IChange["dir"],
+    {
+      text: string;
+      hoverText: string;
+      hoverBg: string;
+      arrow: string;
+    }
+  > = {
+    up: {
+      text: "text-red-600",
+      hoverText: "group-hover:text-red-800",
+      hoverBg: "hover:bg-red-100",
+      arrow: "text-red-600",
+    },
+    down: {
+      text: "text-green-600",
+      hoverText: "group-hover:text-green-800",
+      hoverBg: "hover:bg-green-100",
+      arrow: "text-green-600",
+    },
+    flat: {
+      text: "text-gray-500",
+      hoverText: "group-hover:text-gray-700",
+      hoverBg: "hover:bg-gray-100",
+      arrow: "text-gray-500",
+    },
   };
 
   return (
-    <div className="relative overflow-hidden bg-white">
-      {/* Marquee */}
-      <div className="relative z-10">
-        <MarqueeText duration={10} direction="right" repeat={4}>
-          <div className="flex">
-            {data.map((item: IType) => (
+    <div className="w-full overflow-hidden bg-white">
+      <MarqueeText duration={10} direction="right" repeat={4}>
+        <div className="flex w-max items-center">
+          {data.map((item) => {
+            const colors = priceStyles[item.change.dir];
+
+            return (
               <div
                 key={item.id}
-                className={`flex items-center gap-1 border-r border-b border-gray-200 px-5 py-3 transition-colors duration-300 ${hoverBg[item.change.dir]}`}
+                className={`group flex shrink-0 cursor-default items-center gap-2 px-3 py-2.5 transition-colors duration-300 sm:gap-2.5 sm:px-4 sm:py-3 lg:gap-3 lg:px-5 ${colors.hoverBg}`}
               >
-                <p>
-                  {`${item.categoryIcon} ${
-                    item.nameBn
-                  } ${convertToBanglaNumber(item.today)} টাকা/${
-                    unitBn[item.unit] || item.unit
-                  }`}
+                <p
+                  className={`whitespace-nowrap text-[11px] font-medium text-gray-700 transition-colors duration-300 sm:text-xs lg:text-sm ${colors.hoverText}`}
+                >
+                  {item.categoryIcon} {item.nameBn}{" "}
+                  {convertToBanglaNumber(item.today)} টাকা/
+                  {unitBn[item.unit] || item.unit}
                 </p>
 
-                <p className="flex items-center">
+                <div className="flex shrink-0 items-center gap-0.5">
                   {item.change.dir === "up" && (
-                    <FaCaretUp size={24} className="text-red-600" />
+                    <FaCaretUp
+                      size={18}
+                      className={`shrink-0 sm:h-5 sm:w-5 ${colors.arrow}`}
+                    />
                   )}
 
                   {item.change.dir === "down" && (
-                    <FaCaretDown size={24} className="text-green-600" />
+                    <FaCaretDown
+                      size={18}
+                      className={`shrink-0 sm:h-5 sm:w-5 ${colors.arrow}`}
+                    />
                   )}
 
                   {item.change.dir === "flat" && (
-                    <span className="text-gray-600">-</span>
+                    <span className="text-xs font-bold text-gray-500">
+                      −
+                    </span>
                   )}
 
                   <span
-                    className={`font-bold ${
-                      item.change.dir === "up"
-                        ? "text-red-600"
-                        : item.change.dir === "down"
-                          ? "text-green-600"
-                          : "text-gray-500"
-                    }`}
+                    className={`whitespace-nowrap text-[11px] font-bold transition-colors duration-300 sm:text-xs lg:text-sm ${colors.text} ${colors.hoverText}`}
                   >
                     {convertToBanglaNumber(item.change.pct)}%
                   </span>
-                </p>
+                </div>
               </div>
-            ))}
-          </div>
-        </MarqueeText>
-      </div>
+            );
+          })}
+        </div>
+      </MarqueeText>
     </div>
   );
 };
 
-export default MarqueePage;
+export default Marquee;
+

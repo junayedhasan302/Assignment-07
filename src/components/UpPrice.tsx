@@ -1,5 +1,5 @@
 
-import type { IChange, IType } from "@/types/product";
+import type { IType } from "@/types/product";
 
 const unitBn: Record<string, string> = {
   kg: "কেজি",
@@ -18,17 +18,21 @@ const convertToBanglaNumber = (value: number | string) =>
 const UpPrice = async () => {
   const URL = "https://api.abcz.workers.dev/api/bazardor/products";
 
-  const res = await fetch(URL);
+  const res = await fetch(URL, { cache: "no-store" });
+
+  if (!res.ok) {
+    throw new Error("পণ্যের দাম লোড করা যায়নি।");
+  }
+
   const data: IType[] = await res.json();
 
-  // Only products whose price went up today
   const increased = data.filter((item) => item.change.dir === "up");
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
       {/* Section Heading */}
       <div className="mb-5">
-        <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl">
+        <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
           <span className="mr-2 text-red-600">▲</span>
           আজ দাম বেড়েছে
         </h2>
@@ -40,20 +44,20 @@ const UpPrice = async () => {
 
       {/* Product Cards */}
       {increased.length > 0 ? (
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {increased.map((item) => (
             <article
               key={item.id}
-              className="flex items-center gap-4 rounded-xl border border-gray-200 bg-white p-4 transition-all duration-300 hover:-translate-y-1 hover:border-red-200 hover:shadow-md"
+              className="group flex min-h-[140px] items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-red-200 hover:shadow-lg sm:gap-4 sm:p-5"
             >
               {/* Product Emoji */}
-              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-gray-100 text-4xl">
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-red-50 text-4xl transition-colors duration-300 group-hover:bg-red-100">
                 {item.image}
               </div>
 
               {/* Product Information */}
               <div className="min-w-0 flex-1">
-                <h3 className="truncate text-base font-semibold text-gray-800 sm:text-lg">
+                <h3 className="line-clamp-2 min-h-12 text-base font-semibold leading-6 text-gray-800 sm:text-lg">
                   {item.nameBn}
                 </h3>
 
@@ -63,26 +67,34 @@ const UpPrice = async () => {
               </div>
 
               {/* Price Information */}
-              <div className="shrink-0 text-right">
-                <p className="whitespace-nowrap text-lg font-bold text-gray-900 sm:text-xl">
-                  {convertToBanglaNumber(item.today)} টাকা
+              <div className="flex shrink-0 flex-col items-end gap-2 text-right">
+                <span className="text-xs font-medium text-gray-400">
+                  আজকের দাম
+                </span>
+
+                <p className="whitespace-nowrap text-lg font-extrabold tracking-tight text-gray-900 sm:text-xl">
+                  {convertToBanglaNumber(item.today)}
+                  <span className="ml-1 text-xs font-semibold text-gray-500 sm:text-sm">
+                    টাকা
+                  </span>
                 </p>
 
-                {/* Price Increase Badge */}
-                <div className="mt-2 flex justify-end">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-red-50 px-2.5 py-1 text-xs font-semibold text-red-600">
-                    <span>▲</span>
-                    {convertToBanglaNumber(item.change.pct)}%
-                  </span>
-                </div>
+                {/* Increase Badge */}
+                <span className="inline-flex items-center gap-1 rounded-full border border-red-100 bg-red-50 px-2.5 py-1 text-xs font-bold text-red-600">
+                  <span>▲</span>
+                  {convertToBanglaNumber(item.change.pct)}%
+                </span>
               </div>
             </article>
           ))}
         </div>
       ) : (
-        <div className="rounded-xl border border-gray-200 bg-white px-4 py-10 text-center">
-          <p className="text-lg font-medium text-gray-700">
+        <div className="rounded-2xl border border-gray-200 bg-white px-4 py-12 text-center shadow-sm">
+          <p className="font-semibold text-gray-800">
             আজ কোনো পণ্যের দাম বাড়েনি।
+          </p>
+          <p className="mt-1 text-sm text-gray-500">
+            নতুন দাম আপডেট হলে এখানে দেখা যাবে।
           </p>
         </div>
       )}
