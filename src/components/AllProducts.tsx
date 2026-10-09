@@ -26,7 +26,10 @@ const AllProducts = async () => {
   const products: IType[] = await res.json();
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+    <section
+      id="all-products"
+      className="mx-auto max-w-7xl scroll-mt-24 px-4 py-6 sm:px-6 lg:px-8"
+    >
       {/* Section Heading */}
       <div className="mb-5">
         <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
@@ -140,7 +143,6 @@ const AllProducts = async () => {
                     aria-label={theme.label}
                   >
                     <span>{theme.arrow}</span>
-
                     {isUp || isDown
                       ? `${convertToBanglaNumber(item.change.pct)}%`
                       : theme.label}

@@ -1,4 +1,6 @@
+
 import Image from "next/image";
+
 import HeroImg from "../../public/bazar-hero.png";
 
 const HeroSection = () => {
@@ -7,36 +9,32 @@ const HeroSection = () => {
   });
 
   return (
-    // Wrapper: provides 3D perspective and holds the margin
+    // Wrapper: 3D perspective
     <div className="group relative mt-5 [perspective:1500px]">
-      {/* Invisible hover zones for the four corners */}
+      {/* Hover zones */}
       <span className="tl absolute left-0 top-0 z-10 h-1/2 w-1/2" />
       <span className="tr absolute right-0 top-0 z-10 h-1/2 w-1/2" />
       <span className="bl absolute bottom-0 left-0 z-10 h-1/2 w-1/2" />
       <span className="br absolute bottom-0 right-0 z-10 h-1/2 w-1/2" />
 
-      {/* Card: tilts very gently toward whichever corner is hovered */}
-      <div className="flex flex-col md:flex-row justify-between p-7 gap-3 bg-white border border-gray-200 rounded-xl transition-all duration-700 ease-in-out group-hover:shadow-lg group-has-[.tl:hover]:[transform:rotateX(0.6deg)_rotateY(-0.6deg)] group-has-[.tr:hover]:[transform:rotateX(0.6deg)_rotateY(0.6deg)] group-has-[.bl:hover]:[transform:rotateX(-0.6deg)_rotateY(-0.6deg)] group-has-[.br:hover]:[transform:rotateX(-0.6deg)_rotateY(0.6deg)]">
-        <div className="">
-          <p className="font-medium text-[14px] text-green-700  bg-[#a0e5b9] p-1 inline rounded-xl px-3">
-            {" "}
+      {/* Main card */}
+      <div className="flex flex-col justify-between gap-3 rounded-xl border border-gray-200 bg-white p-7 transition-all duration-700 ease-in-out group-hover:shadow-lg md:flex-row group-has-[.tl:hover]:[transform:rotateX(0.6deg)_rotateY(-0.6deg)] group-has-[.tr:hover]:[transform:rotateX(0.6deg)_rotateY(0.6deg)] group-has-[.bl:hover]:[transform:rotateX(-0.6deg)_rotateY(-0.6deg)] group-has-[.br:hover]:[transform:rotateX(-0.6deg)_rotateY(0.6deg)]">
+        <div>
+          <p className="inline rounded-xl bg-[#a0e5b9] p-1 px-3 text-[14px] font-medium text-green-700">
             {date}
           </p>
 
-          <p className="font-normal text-[16px] text-gray-800 opacity-70 w-auto md:w-145 pt-20 pb-7">
+          <p className="w-auto pt-20 pb-7 text-[16px] font-normal text-gray-800 opacity-70 md:w-145">
             চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার দাম — বাজারভিত্তিক
             বিস্তারিত, গড়, সর্বনিম্ন-সর্বাধিক এবং দামের পরিবর্তন এক জায়গায়।
           </p>
 
-          {/* z-20 keeps the button clickable above the invisible corner zones */}
-          <button className="relative z-20">
-            <a
-              href="#"
-              className="font-semibold text-[16px] text-[#F3FBF4] px-4 py-2 pb-1.5 bg-[#047F39] rounded-lg"
-            >
-              সব পণ্য দেখুন
-            </a>
-          </button>
+          <a
+            href="#all-products"
+            className="relative z-20 inline-block rounded-lg bg-[#047F39] px-4 py-2 pb-1.5 text-[16px] font-semibold text-[#F3FBF4]"
+          >
+            সব পণ্য দেখুন
+          </a>
         </div>
 
         <div>
@@ -45,8 +43,8 @@ const HeroSection = () => {
             alt="banner-img"
             width={400}
             height={400}
-            className="w-75 h-auto"
-          ></Image>
+            className="h-auto w-75"
+          />
         </div>
       </div>
     </div>
@@ -54,3 +52,4 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
