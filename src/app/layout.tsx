@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import "./globals.css";
 import { Hind_Siliguri } from "next/font/google";
 import Header from "@/components/Header";
-
+import Footer from "@/components/Footer";
 
 const hindSiliguri = Hind_Siliguri({
   variable: "--font-hind-siliguri",
@@ -24,6 +24,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="flex min-h-full flex-col font-bangla">
         <Header/>
         <main className="mx-auto w-full max-w-7xl">{children}</main>
+        <Footer />
       </body>
     </html>
   );

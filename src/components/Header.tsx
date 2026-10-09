@@ -38,9 +38,12 @@ const Header = () => {
 
             {/* Brand Name + Date */}
             <div className="min-w-0">
-              <h1 className="text-xl font-extrabold tracking-tight text-green-700 sm:text-2xl lg:text-3xl">
+              {/* <h1 className="text-xl font-extrabold tracking-tight text-green-700 sm:text-2xl lg:text-3xl">
                 বাজার দর
-              </h1>
+              </h1> */}
+              <span className="text-xl font-extrabold tracking-tight text-green-700 sm:text-2xl lg:text-3xl">
+                বাজার দর<span className="text-[#FC3F33]">.</span>
+              </span>
 
               <p className="mt-1 text-[10px] leading-4 text-gray-500 sm:text-xs lg:text-sm">
                 {today}
