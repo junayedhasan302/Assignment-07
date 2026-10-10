@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="bn" className={`${hindSiliguri.className} h-full antialiased`}>
+    <html lang="bn" data-scroll-behavior="smooth" className={`${hindSiliguri.className} h-full antialiased`}>
       <body className="flex min-h-full flex-col font-bangla">
         <Header/>
         <main className="mx-auto w-full max-w-7xl">{children}</main>

@@ -55,6 +55,7 @@ const HeroSection = () => {
             alt="banner-img"
             width={400}
             height={400}
+            loading="eager"
             className="h-auto w-full max-w-[260px] object-contain sm:max-w-[320px] md:w-64 lg:w-75"
           />
         </div>
