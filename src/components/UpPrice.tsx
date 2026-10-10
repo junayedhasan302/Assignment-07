@@ -1,4 +1,3 @@
-
 export interface IType {
   id: number;
   slug: string;
@@ -33,8 +32,10 @@ const convertToBanglaNumber = (value: number | string) =>
   String(value).replace(/\d/g, (digit) => "০১২৩৪৫৬৭৮৯"[Number(digit)]);
 
 const UpPrice = async () => {
-  // const URL = "https://api.api-store.workers.dev/api/bazardor/products";
-  const URL = "https://api.abcz.workers.dev/api/bazardor/products";
+  // const URL2 = "https://api.api-store.workers.dev/api/bazardor/products";
+  // const URL = "https://api.abcz.workers.dev/api/bazardor/products";
+  const URL = "https://openapi.programming-hero.com/api/bazardor/products";
+
   // const URL = "https://api.api-store.workers.dev/api/bazardor/products" || "https://api.abcz.workers.dev/api/bazardor/products";
 
   const res = await fetch(URL, { cache: "no-store" });
@@ -56,9 +57,7 @@ const UpPrice = async () => {
           আজ দাম বেড়েছে
         </h2>
 
-        <p className="mt-1 text-sm text-gray-500">
-          যেসব পণ্যের দাম আজ বেড়েছে
-        </p>
+        <p className="mt-1 text-sm text-gray-500">যেসব পণ্যের দাম আজ বেড়েছে</p>
       </div>
 
       {/* Product Cards */}
@@ -123,4 +122,3 @@ const UpPrice = async () => {
 };
 
 export default UpPrice;
-

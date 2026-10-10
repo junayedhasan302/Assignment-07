@@ -8,20 +8,23 @@ interface IProduct {
   categoryNameBn: string;
   categoryIcon: string;
 }
-const URL1 = "https://api.abcz.workers.dev/api/bazardor/products";
+// const URL1 = "https://api.abcz.workers.dev/api/bazardor/products";
 // const URL2 ="https://api.api-store.workers.dev/api/bazardor/products";
+const URL3 = "https://openapi.programming-hero.com/api/bazardor/products";
+
 const HeaderCategories = () => {
   const [categories, setCategories] = useState<IProduct[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("");
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const res = await fetch(URL1);
+      const res = await fetch(URL3);
       const data: IProduct[] = await res.json();
 
       const uniqueCategories = data.filter(
         (item, index, self) =>
-          index === self.findIndex((category) => category.category === item.category),
+          index ===
+          self.findIndex((category) => category.category === item.category),
       );
 
       setCategories(uniqueCategories);

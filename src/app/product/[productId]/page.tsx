@@ -37,10 +37,9 @@ export default async function ProductDetailsPage({ params }: Props) {
   const { productId } = await params;
 
   const res = await fetch(
-    "https://api.abcz.workers.dev/api/bazardor/products",
-    {
-      next: { revalidate: 60 },
-    },
+    "https://openapi.programming-hero.com/api/bazardor/products",
+    { next: { revalidate: 60 } },
+    //   const res = await fetch("https://api.abcz.workers.dev/api/bazardor/products",{next: { revalidate: 60 },}
   );
 
   if (!res.ok) {
@@ -151,8 +150,22 @@ export default async function ProductDetailsPage({ params }: Props) {
               </p>
 
               <p className="text-[14px] font-normal text-[#1D271F]">
-                গতকালের তুলনায় আজকের দামের পরিবর্তন: {toBn(product.yesterday)} →{" "}
-                {toBn(product.today)} টাকা
+                গতকালের তুলনায় আজ দাম{" "}
+                {Number(product.today) > Number(product.yesterday) ? (
+                  <>
+                    <span className="font-bold text-red-600">বেড়েছে</span>{" "}
+                    {toBn(Number(product.today) - Number(product.yesterday))}{" "}
+                    টাকা
+                  </>
+                ) : Number(product.today) < Number(product.yesterday) ? (
+                  <>
+                    <span className="font-bold text-green-600">কমেছে</span>{" "}
+                    {toBn(Number(product.yesterday) - Number(product.today))}{" "}
+                    টাকা
+                  </>
+                ) : (
+                  <span className="font-bold">পরিবর্তন হয়নি</span>
+                )}
               </p>
             </div>
           </div>

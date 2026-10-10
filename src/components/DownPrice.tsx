@@ -1,4 +1,23 @@
-import type { IType } from "@/types/product";
+type IType = {
+  id: number | string;
+  slug: string;
+  nameBn: string;
+  category: string;
+  categoryNameBn: string;
+  categoryIcon: string;
+  unit: string;
+  image: string;
+  today: number;
+  yesterday: number;
+  lastWeek: number;
+  lastMonth: number;
+  change: {
+    dir: "up" | "down" | "flat";
+    pct: number;
+  };
+  markets: [];
+};
+
 
 const unitBn: Record<string, string> = {
   kg: "কেজি",
@@ -15,8 +34,10 @@ const convertToBanglaNumber = (value: number | string) =>
   String(value).replace(/\d/g, (digit) => "০১২৩৪৫৬৭৮৯"[Number(digit)]);
 
 const DownPrice = async () => {
-  const URL = "https://api.abcz.workers.dev/api/bazardor/products";
+  // const URL = "https://api.abcz.workers.dev/api/bazardor/products";
   // const URL ="https://api.api-store.workers.dev/api/bazardor/products";
+  const URL = "https://openapi.programming-hero.com/api/bazardor/products";
+
   //  const URL = "https://api.api-store.workers.dev/api/bazardor/products" || "https://api.abcz.workers.dev/api/bazardor/products";
 
   const res = await fetch(URL, { cache: "no-store" });

@@ -30,9 +30,9 @@ type CategoryPageProps = {
 const CategoryPage = async ({ params }: CategoryPageProps) => {
   const { categoryId } = await params;
 
-  const res = await fetch(
-    `https://api.abcz.workers.dev/api/bazardor/products?category=${categoryId}`
-  );
+    // const res = await fetch(`https://api.abcz.workers.dev/api/bazardor/products?category=${categoryId}`);
+    const res = await fetch(`https://openapi.programming-hero.com/api/bazardor/products?category=${categoryId}`);
+
 
   const categoryData: IProduct[] = await res.json();
 
