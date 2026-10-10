@@ -1,4 +1,3 @@
-
 import type { IType } from "@/types/product";
 
 const unitBn: Record<string, string> = {
@@ -17,8 +16,8 @@ const convertToBanglaNumber = (value: number | string) =>
 
 const DownPrice = async () => {
   const URL = "https://api.abcz.workers.dev/api/bazardor/products";
-    // const URL ="https://api.api-store.workers.dev/api/bazardor/products";
-    //  const URL = "https://api.api-store.workers.dev/api/bazardor/products" || "https://api.abcz.workers.dev/api/bazardor/products";
+  // const URL ="https://api.api-store.workers.dev/api/bazardor/products";
+  //  const URL = "https://api.api-store.workers.dev/api/bazardor/products" || "https://api.abcz.workers.dev/api/bazardor/products";
 
   const res = await fetch(URL, { cache: "no-store" });
 
@@ -39,9 +38,7 @@ const DownPrice = async () => {
           আজ দাম কমেছে
         </h2>
 
-        <p className="mt-1 text-sm text-gray-500">
-          যেসব পণ্যের দাম আজ কমেছে
-        </p>
+        <p className="mt-1 text-sm text-gray-500">যেসব পণ্যের দাম আজ কমেছে</p>
       </div>
 
       {/* Product Cards */}
@@ -50,16 +47,16 @@ const DownPrice = async () => {
           {decreased.map((item) => (
             <article
               key={item.id}
-              className="group flex min-h-[140px] items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-emerald-200 hover:shadow-lg sm:gap-4 sm:p-5"
+              className="group flex min-h-[140px] items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-green-500 hover:bg-green-100 hover:shadow-lg sm:gap-4 sm:p-5"
             >
               {/* Product Emoji */}
-              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-4xl transition-colors duration-300 group-hover:bg-emerald-100">
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-4xl transition-colors duration-300 group-hover:bg-emerald-200">
                 {item.image}
               </div>
 
               {/* Product Information */}
-              <div className="min-w-0 flex-1">
-                <h3 className="line-clamp-2 min-h-12 text-base font-semibold leading-6 text-gray-800 sm:text-lg">
+              <div className="min-w-0 flex-1 ">
+                <h3 className="line-clamp-2 min-h-12 text-base font-semibold leading-6 text-gray-800 transition-colors duration-300 group-hover:text-green-700 sm:text-lg">
                   {item.nameBn}
                 </h3>
 
@@ -70,7 +67,7 @@ const DownPrice = async () => {
 
               {/* Price Information */}
               <div className="flex shrink-0 flex-col items-end gap-2 text-right">
-                <span className="text-xs font-medium text-gray-400">
+                <span className="text-xs font-medium text-green-700">
                   আজকের দাম
                 </span>
 

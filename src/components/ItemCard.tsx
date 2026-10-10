@@ -41,46 +41,25 @@ const ItemCard = ({ data }: { data: IType }) => {
     maund: "মণ",
   };
 
-  const theme = isUp
-    ? {
-        bg: "bg-red-50",
-        border: "border-red-200",
-        color: "text-red-600",
-        hoverBorder: "hover:border-red-300",
-        hoverBg: "group-hover:bg-red-100",
-        hoverText: "group-hover:text-red-600",
-        arrow: "▲",
-        label: "দাম বেড়েছে",
-      }
-    : isDown
-      ? {
-          bg: "bg-emerald-50",
-          border: "border-emerald-200",
-          color: "text-emerald-600",
-          hoverBorder: "hover:border-emerald-300",
-          hoverBg: "group-hover:bg-emerald-100",
-          hoverText: "group-hover:text-emerald-600",
-          arrow: "▼",
-          label: "দাম কমেছে",
-        }
-      : {
-          bg: "bg-gray-50",
-          border: "border-gray-200",
-          color: "text-gray-500",
-          hoverBorder: "hover:border-gray-300",
-          hoverBg: "group-hover:bg-gray-100",
-          hoverText: "group-hover:text-gray-600",
-          arrow: "●",
-          label: "অপরিবর্তিত",
-        };
-
   return (
     <article
-      className={`group flex min-h-[140px] items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:gap-4 sm:p-5 ${theme.hoverBorder}`}
+      className={`group flex min-h-[140px] items-center gap-3 rounded-2xl border bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:gap-4 sm:p-5 ${
+        isUp
+          ? "border-red-200 hover:border-red-300"
+          : isDown
+            ? "border-emerald-200 hover:border-emerald-300"
+            : "border-gray-200 hover:border-gray-300"
+      }`}
     >
       {/* Product Icon */}
       <div
-        className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-xl text-4xl transition-colors duration-300 ${theme.bg} ${theme.hoverBg}`}
+        className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-xl text-4xl transition-colors duration-300 ${
+          isUp
+            ? "bg-red-50 group-hover:bg-red-100"
+            : isDown
+              ? "bg-emerald-50 group-hover:bg-emerald-100"
+              : "bg-gray-50 group-hover:bg-gray-100"
+        }`}
       >
         {data.image}
       </div>
@@ -88,7 +67,13 @@ const ItemCard = ({ data }: { data: IType }) => {
       {/* Product Information */}
       <div className="min-w-0 flex-1">
         <h3
-          className={`line-clamp-2 min-h-12 text-base font-semibold leading-6 text-gray-800 transition-colors duration-300 sm:text-lg ${theme.hoverText}`}
+          className={`line-clamp-2 min-h-12 text-base font-semibold leading-6 text-gray-800 transition-colors duration-300 sm:text-lg ${
+            isUp
+              ? "group-hover:text-red-600"
+              : isDown
+                ? "group-hover:text-emerald-600"
+                : "group-hover:text-gray-600"
+          }`}
         >
           {data.nameBn}
         </h3>
@@ -114,14 +99,22 @@ const ItemCard = ({ data }: { data: IType }) => {
 
         {/* Price Change Badge */}
         <span
-          className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs font-bold ${theme.bg} ${theme.border} ${theme.color}`}
-          aria-label={theme.label}
+          className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs font-bold ${
+            isUp
+              ? "border-red-200 bg-red-50 text-red-600"
+              : isDown
+                ? "border-emerald-200 bg-emerald-50 text-emerald-600"
+                : "border-gray-200 bg-gray-50 text-gray-500"
+          }`}
+          aria-label={
+            isUp ? "দাম বেড়েছে" : isDown ? "দাম কমেছে" : "অপরিবর্তিত"
+          }
         >
-          <span>{theme.arrow}</span>
+          <span>{isUp ? "▲" : isDown ? "▼" : "●"}</span>
 
           {isUp || isDown
             ? `${toBanglaNumber(Math.abs(data.change.pct).toFixed(1))}%`
-            : theme.label}
+            : "অপরিবর্তিত"}
         </span>
       </div>
     </article>

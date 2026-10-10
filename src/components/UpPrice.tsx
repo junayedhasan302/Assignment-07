@@ -87,7 +87,7 @@ const UpPrice = async () => {
 
               {/* Price Information */}
               <div className="flex shrink-0 flex-col items-end gap-2 text-right">
-                <span className="text-xs font-medium text-gray-400">
+                <span className="text-xs font-medium text-red-600">
                   আজকের দাম
                 </span>
 
