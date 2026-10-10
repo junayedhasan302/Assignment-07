@@ -28,11 +28,11 @@ export interface IType {
 
 const Marquee = async () => {
   // All products
-  const URL ="https://api.abcz.workers.dev/api/bazardor/products";
-  // const URL ="https://api.api-store.workers.dev/api/bazardor/products";
+  const URL1 ="https://api.abcz.workers.dev/api/bazardor/products";
+  // const URL2 ="https://api.api-store.workers.dev/api/bazardor/products";
     //  const URL = "https://api.api-store.workers.dev/api/bazardor/products" || "https://api.abcz.workers.dev/api/bazardor/products";
 
-  const res = await fetch(URL);
+  const res = await fetch(URL1);
   const data: IType[] = await res.json();
 
   const unitBn: Record<string, string> = {

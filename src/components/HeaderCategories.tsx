@@ -1,26 +1,53 @@
-interface ICategory {
-  id: string;
-  nameBn: string;
-  icon: string;
-}
+"use client";
 
-const HeaderCategories = async () => {
-  const URL = "https://api.abcz.workers.dev/api/bazardor/categories";
-  // const URL = "https://api.api-store.workers.dev/api/bazardor/categories";
-  const res = await fetch(URL);
-  const data = await res.json();
+import Link from "next/link";
+import { useEffect, useState } from "react";
+
+interface IProduct {
+  category: string;
+  categoryNameBn: string;
+  categoryIcon: string;
+}
+const URL1 = "https://api.abcz.workers.dev/api/bazardor/products";
+// const URL2 ="https://api.api-store.workers.dev/api/bazardor/products";
+const HeaderCategories = () => {
+  const [categories, setCategories] = useState<IProduct[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const res = await fetch(URL1);
+      const data: IProduct[] = await res.json();
+
+      const uniqueCategories = data.filter(
+        (item, index, self) =>
+          index === self.findIndex((category) => category.category === item.category),
+      );
+
+      setCategories(uniqueCategories);
+    };
+
+    fetchCategories();
+  }, []);
 
   return (
-    <nav className="py-3 bg-white border border-gray-100 border-l-0 border-r-0">
-      <div className="max-w-7xl mx-auto">
-        <ul className="flex gap-10 px-10">
-          {data.map((item: ICategory) => (
-            <li
-              key={item.id}
-              className="flex items-center gap-2 font-semibold text-4"
-            >
-              <span>{item.icon}</span>
-              <h3>{item.nameBn}</h3>
+    <nav className="border-y border-gray-100 bg-white py-3">
+      <div className="mx-auto max-w-7xl">
+        <ul className="flex gap-3 overflow-x-auto whitespace-nowrap px-4">
+          {categories.map((item) => (
+            <li key={item.category}>
+              <Link
+                href={`/category/${item.category}`}
+                onClick={() => setSelectedCategory(item.category)}
+                className={`flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition-colors ${
+                  selectedCategory === item.category
+                    ? "bg-green-600 text-white"
+                    : "bg-gray-50 text-gray-700 hover:bg-green-50 hover:text-green-700"
+                }`}
+              >
+                <span>{item.categoryIcon}</span>
+                <span>{item.categoryNameBn}</span>
+              </Link>
             </li>
           ))}
         </ul>
