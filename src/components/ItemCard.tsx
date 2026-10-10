@@ -1,4 +1,6 @@
 
+import Link from "next/link";
+
 type IType = {
   id: number | string;
   slug: string;
@@ -42,7 +44,9 @@ const ItemCard = ({ data }: { data: IType }) => {
   };
 
   return (
-    <article
+    <Link
+      href={`/product/${data.id}`}
+      aria-label={`${data.nameBn} পণ্যের বিস্তারিত দেখুন`}
       className={`group flex min-h-[140px] items-center gap-3 rounded-2xl border bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:gap-4 sm:p-5 ${
         isUp
           ? "border-red-200 hover:border-red-300"
@@ -107,17 +111,23 @@ const ItemCard = ({ data }: { data: IType }) => {
                 : "border-gray-200 bg-gray-50 text-gray-500"
           }`}
           aria-label={
-            isUp ? "দাম বেড়েছে" : isDown ? "দাম কমেছে" : "অপরিবর্তিত"
+            isUp
+              ? "দাম বেড়েছে"
+              : isDown
+                ? "দাম কমেছে"
+                : "অপরিবর্তিত"
           }
         >
           <span>{isUp ? "▲" : isDown ? "▼" : "●"}</span>
 
           {isUp || isDown
-            ? `${toBanglaNumber(Math.abs(data.change.pct).toFixed(1))}%`
+            ? `${toBanglaNumber(
+                Math.abs(data.change.pct).toFixed(1)
+              )}%`
             : "অপরিবর্তিত"}
         </span>
       </div>
-    </article>
+    </Link>
   );
 };
 
