@@ -18,7 +18,12 @@ type IType = {
     dir: "up" | "down" | "flat";
     pct: number;
   };
-  markets: [];
+  markets?: {
+  market: string;
+  division: string;
+  min: number | string;
+  max: number | string;
+}[];
 };
 
 const ItemCard = ({ data }: { data: IType }) => {

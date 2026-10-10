@@ -23,7 +23,6 @@ export interface IType {
   lastWeek: number;
   lastMonth: number;
   change: IChange;
-  markets: [];
 }
 
 const Marquee = async () => {
@@ -83,7 +82,7 @@ const Marquee = async () => {
 
   return (
     <div className="w-full overflow-hidden bg-white">
-      <MarqueeText duration={10} direction="right" repeat={4}>
+      <MarqueeText duration={10} direction="right">
         <div className="flex w-max items-center">
           {data.map((item) => {
             const colors = priceStyles[item.change.dir];

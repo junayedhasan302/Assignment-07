@@ -18,6 +18,12 @@ export interface IType {
     dir: "up" | "down" | "flat";
     pct: number;
   };
+    markets?: {
+    market: string;
+    division: string;
+    min: number | string;
+    max: number | string;
+  }[];
 }
 
 const UpPrice = async () => {

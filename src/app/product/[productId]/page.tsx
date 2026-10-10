@@ -1,5 +1,23 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+type IType = {
+  id: number | string;
+  slug: string;
+  nameBn: string;
+  category: string;
+  categoryNameBn: string;
+  categoryIcon: string;
+  unit: string;
+  image: string;
+  today: number;
+  yesterday: number;
+  lastWeek: number;
+  lastMonth: number;
+  change: {
+    dir: "up" | "down" | "flat";
+    pct: number;
+  };
+};
 
 type IMarket = {
   market: string;
@@ -8,7 +26,7 @@ type IMarket = {
   max: number | string;
 };
 
-type IProduct = Omit<IType, "markets"> & {
+type IProduct = IType & {
   markets: IMarket[];
 };
 
