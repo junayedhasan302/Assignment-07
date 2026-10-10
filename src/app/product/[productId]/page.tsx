@@ -1,4 +1,3 @@
-import { IType } from "@/app/types/type";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -36,11 +35,15 @@ const unitBn: Record<string, string> = {
 export default async function ProductDetailsPage({ params }: Props) {
   const { productId } = await params;
 
+  // Testing only: show the loading skeleton
+  //   await new Promise((resolve) => setTimeout(resolve, 3000));
+
   const res = await fetch(
     "https://openapi.programming-hero.com/api/bazardor/products",
     { next: { revalidate: 60 } },
-    //   const res = await fetch("https://api.abcz.workers.dev/api/bazardor/products",{next: { revalidate: 60 },}
   );
+
+  // const res = await fetch("https://api.abcz.workers.dev/api/bazardor/products",{next: { revalidate: 60 },});
 
   if (!res.ok) {
     throw new Error("পণ্যের তথ্য লোড করা যায়নি।");

@@ -1,3 +1,9 @@
+
+"use client";
+
+import { useState } from "react";
+import ItemCard from "./ItemCard";
+
 type IType = {
   id: number | string;
   slug: string;
@@ -18,169 +24,167 @@ type IType = {
   markets: [];
 };
 
-const unitBn: Record<string, string> = {
-  kg: "কেজি",
-  gram: "গ্রাম",
-  g: "গ্রাম",
-  litre: "লিটার",
-  ml: "মিলিলিটার",
-  piece: "পিস",
-  dozen: "ডজন",
-  maund: "মণ",
-};
+type SortOrder = "default" | "asc" | "desc";
 
-const convertToBanglaNumber = (value: number | string) =>
-  String(value).replace(/\d/g, (digit) => "০১২৩৪৫৬৭৮৯"[Number(digit)]);
+const AllProducts = ({
+  products,
+}: {
+  products: IType[];
+}) => {
+  const [sortOrder, setSortOrder] = useState<SortOrder>("default");
+  const [isOpen, setIsOpen] = useState(false);
 
-const AllProducts = async () => {
-  // const URL = "https://api.abcz.workers.dev/api/bazardor/products";
-  // const URL = "https://api.api-store.workers.dev/api/bazardor/products";
-  const URL = "https://openapi.programming-hero.com/api/bazardor/products";
+  const options = [
+    { value: "default", label: "ডিফল্ট", icon: "✦" },
+    { value: "asc", label: "কম দাম থেকে বেশি দাম", icon: "↑" },
+    { value: "desc", label: "বেশি দাম থেকে কম দাম", icon: "↓" },
+  ] as const;
 
-  //  const URL = "https://api.api-store.workers.dev/api/bazardor/products" || "https://api.abcz.workers.dev/api/bazardor/products";
+  const selectedOption = options.find(
+    (option) => option.value === sortOrder
+  )!;
 
-  const res = await fetch(URL, { cache: "no-store" });
-
-  if (!res.ok) {
-    throw new Error("পণ্যের তালিকা লোড করা যায়নি।");
-  }
-
-  const products: IType[] = await res.json();
+  const sortedProducts = [...products].sort((a, b) => {
+    if (sortOrder === "asc") return a.today - b.today;
+    if (sortOrder === "desc") return b.today - a.today;
+    return 0;
+  });
 
   return (
     <section
       id="all-products"
       className="mx-auto max-w-7xl scroll-mt-24 px-4 py-6 sm:px-6 lg:px-8"
     >
-      {/* Section Heading */}
-      <div className="mb-5">
-        <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-          সকল পণ্য
-        </h2>
+      {/* Heading and Sort */}
+      <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+            সকল পণ্য
+          </h2>
 
-        <p className="mt-1 text-sm text-gray-500">
-          বাজারের সব পণ্যের বর্তমান দাম ও দামের পরিবর্তন
-        </p>
+          <p className="mt-1 text-sm text-gray-500">
+            বাজারের সব পণ্যের বর্তমান দাম ও দামের পরিবর্তন
+          </p>
 
-        {/* Price Change Legend */}
-        <div className="mt-4 flex flex-wrap items-center gap-3 text-xs font-medium sm:gap-4">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-red-50 px-3 py-1.5 text-red-600">
-            <span>▲</span>
-            দাম বেড়েছে
-          </span>
+          <p className="mt-2 text-sm text-gray-600">
+            মোট পণ্য:{" "}
+            <span className="font-bold text-[#047F39]">
+              {products.length.toLocaleString("bn-BD")}
+            </span>{" "}
+            টি
+          </p>
+        </div>
 
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1.5 text-emerald-700">
-            <span>▼</span>
-            দাম কমেছে
-          </span>
+        {/* Sort Dropdown */}
+        <div className="relative z-20 w-full sm:w-auto">
+          <div className="flex items-center gap-3 rounded-xl border border-[#E0E8E1] bg-white p-2 shadow-sm">
+            <span className="shrink-0 pl-1 text-sm font-semibold text-[#1D271F]">
+              সাজান
+            </span>
 
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1.5 text-gray-600">
-            <span>●</span>
-            অপরিবর্তিত
-          </span>
+            <button
+              type="button"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-expanded={isOpen}
+              aria-haspopup="listbox"
+              className="flex w-full min-w-0 items-center justify-between gap-3 rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm font-semibold text-gray-700 transition-colors hover:border-green-400 hover:bg-green-50 sm:w-[240px]"
+            >
+              <span className="flex min-w-0 items-center gap-2">
+                <span className="font-bold text-green-700">
+                  {selectedOption.icon}
+                </span>
+                <span className="truncate">
+                  {selectedOption.label}
+                </span>
+              </span>
+
+              <svg
+                className={`h-4 w-4 shrink-0 text-green-700 transition-transform ${
+                  isOpen ? "rotate-180" : ""
+                }`}
+                viewBox="0 0 20 20"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                {/* SVG arrow icon for the sort dropdown */}
+                <path
+                  d="m5 7 5 5 5-5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+
+          {isOpen && (
+            <div
+              role="listbox"
+              aria-label="দাম অনুযায়ী সাজান"
+              className="absolute right-0 top-full z-50 mt-2 w-full overflow-hidden rounded-xl border border-green-100 bg-white p-1.5 shadow-xl sm:w-[280px]"
+            >
+              {options.map((option) => (
+                <button
+                  key={option.value}
+                  type="button"
+                  role="option"
+                  aria-selected={sortOrder === option.value}
+                  onClick={() => {
+                    setSortOrder(option.value);
+                    setIsOpen(false);
+                  }}
+                  className={`flex w-full items-center gap-3 rounded-lg px-3 py-3 text-left text-sm font-medium transition-colors ${
+                    sortOrder === option.value
+                      ? "bg-green-50 text-green-800"
+                      : "text-gray-700 hover:bg-green-50 hover:text-green-800"
+                  }`}
+                >
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gray-100 text-base font-bold text-green-700">
+                    {option.icon}
+                  </span>
+
+                  <span className="flex-1">{option.label}</span>
+
+                  {sortOrder === option.value && (
+                    <span className="font-bold text-green-600">✓</span>
+                  )}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
-      {/* All Product Cards */}
-      {products.length > 0 ? (
+      {/* Price Change Legend */}
+      <div className="mb-5 flex flex-wrap items-center gap-3 text-xs font-medium sm:gap-4">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-red-50 px-3 py-1.5 text-red-600">
+          ▲ দাম বেড়েছে
+        </span>
+
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1.5 text-emerald-700">
+          ▼ দাম কমেছে
+        </span>
+
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1.5 text-gray-600">
+          ● অপরিবর্তিত
+        </span>
+      </div>
+
+      {/* Product Cards */}
+      {sortedProducts.length > 0 ? (
         <div className="grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {products.map((item) => {
-            const isUp = item.change.dir === "up";
-            const isDown = item.change.dir === "down";
-
-            const theme = isUp
-              ? {
-                  arrow: "▲",
-                  label: "দাম বেড়েছে",
-                  color: "text-red-600",
-                  bg: "bg-red-50",
-                  border: "border-red-100",
-                  hoverBorder: "hover:border-red-200",
-                  hoverBg: "group-hover:bg-red-50",
-                  hoverText: "group-hover:text-red-700",
-                }
-              : isDown
-                ? {
-                    arrow: "▼",
-                    label: "দাম কমেছে",
-                    color: "text-emerald-700",
-                    bg: "bg-emerald-50",
-                    border: "border-emerald-100",
-                    hoverBorder: "hover:border-emerald-200",
-                    hoverBg: "group-hover:bg-emerald-50",
-                    hoverText: "group-hover:text-emerald-700",
-                  }
-                : {
-                    arrow: "●",
-                    label: "অপরিবর্তিত",
-                    color: "text-gray-500",
-                    bg: "bg-gray-100",
-                    border: "border-gray-200",
-                    hoverBorder: "hover:border-gray-300",
-                    hoverBg: "group-hover:bg-gray-100",
-                    hoverText: "group-hover:text-gray-700",
-                  };
-
-            return (
-              <article
-                key={item.id}
-                className={`group flex min-h-[140px] items-center gap-3 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:gap-4 sm:p-5 ${theme.hoverBorder}`}
-              >
-                {/* Product Emoji */}
-                <div
-                  className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-xl text-4xl transition-colors duration-300 ${theme.bg} ${theme.hoverBg}`}
-                >
-                  {item.image}
-                </div>
-
-                {/* Product Information */}
-                <div className="min-w-0 flex-1">
-                  <h3
-                    className={`line-clamp-2 min-h-12 text-base font-semibold leading-6 text-gray-800 transition-colors duration-300 sm:text-lg ${theme.hoverText}`}
-                  >
-                    {item.nameBn}
-                  </h3>
-
-                  <p className="mt-1 text-sm text-gray-500">
-                    প্রতি {unitBn[item.unit] || item.unit}
-                  </p>
-                </div>
-
-                {/* Price and Change */}
-                <div className="flex shrink-0 flex-col items-end gap-2 text-right">
-                  <span className="text-xs font-medium text-gray-400">
-                    আজকের দাম
-                  </span>
-
-                  <p className="whitespace-nowrap text-lg font-extrabold tracking-tight text-gray-900 sm:text-xl">
-                    {convertToBanglaNumber(item.today)}
-                    <span className="ml-1 text-xs font-semibold text-gray-500 sm:text-sm">
-                      টাকা
-                    </span>
-                  </p>
-
-                  {/* Change Badge */}
-                  <span
-                    className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs font-bold ${theme.bg} ${theme.border} ${theme.color}`}
-                    aria-label={theme.label}
-                  >
-                    <span>{theme.arrow}</span>
-                    {isUp || isDown
-                      ? `${convertToBanglaNumber(item.change.pct)}%`
-                      : theme.label}
-                  </span>
-                </div>
-              </article>
-            );
-          })}
+          {sortedProducts.map((item) => (
+            <ItemCard key={item.id} data={item} />
+          ))}
         </div>
       ) : (
         <div className="rounded-2xl border border-gray-200 bg-white px-4 py-12 text-center shadow-sm">
           <p className="font-semibold text-gray-800">
             কোনো পণ্যের তথ্য পাওয়া যায়নি।
           </p>
-
-          <p className="mt-1 text-sm text-gray-500">পরে আবার চেষ্টা করো।</p>
+          <p className="mt-1 text-sm text-gray-500">
+            পরে আবার চেষ্টা করো।
+          </p>
         </div>
       )}
     </section>

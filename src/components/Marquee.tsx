@@ -1,4 +1,4 @@
-
+import Link from "next/link";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import MarqueeText from "react-marquee-text";
 
@@ -28,10 +28,10 @@ export interface IType {
 
 const Marquee = async () => {
   // All products
-  // const URL1 ="https://api.abcz.workers.dev/api/bazardor/products";
-  // const URL2 ="https://api.api-store.workers.dev/api/bazardor/products";
-    const URL3 = "https://openapi.programming-hero.com/api/bazardor/products";
-    //  const URL = "https://api.api-store.workers.dev/api/bazardor/products" || "https://api.abcz.workers.dev/api/bazardor/products";
+  // const URL1 = "https://api.abcz.workers.dev/api/bazardor/products";
+  // const URL2 = "https://api.api-store.workers.dev/api/bazardor/products";
+
+  const URL3 = "https://openapi.programming-hero.com/api/bazardor/products";
 
   const res = await fetch(URL3);
   const data: IType[] = await res.json();
@@ -47,13 +47,8 @@ const Marquee = async () => {
     maund: "মণ",
   };
 
-  const convertToBanglaNumber = (
-    value: number | string,
-  ) => {
-    return String(value).replace(
-      /\d/g,
-      (digit) => "০১২৩৪৫৬৭৮৯"[Number(digit)],
-    );
+  const convertToBanglaNumber = (value: number | string) => {
+    return String(value).replace(/\d/g, (digit) => "০১২৩৪৫৬৭৮৯"[Number(digit)]);
   };
 
   // Colors based on price direction
@@ -94,9 +89,10 @@ const Marquee = async () => {
             const colors = priceStyles[item.change.dir];
 
             return (
-              <div
+              <Link
                 key={item.id}
-                className={`group flex shrink-0 cursor-default items-center gap-2 px-3 py-2.5 transition-colors duration-300 sm:gap-2.5 sm:px-4 sm:py-3 lg:gap-3 lg:px-5 ${colors.hoverBg}`}
+                href={`/product/${item.id}`}
+                className={`group flex shrink-0 cursor-pointer items-center gap-2 px-3 py-2.5 transition-colors duration-300 sm:gap-2.5 sm:px-4 sm:py-3 lg:gap-3 lg:px-5 ${colors.hoverBg}`}
               >
                 <p
                   className={`whitespace-nowrap text-[11px] font-medium text-gray-700 transition-colors duration-300 sm:text-xs lg:text-sm ${colors.hoverText}`}
@@ -122,9 +118,7 @@ const Marquee = async () => {
                   )}
 
                   {item.change.dir === "flat" && (
-                    <span className="text-xs font-bold text-gray-500">
-                      −
-                    </span>
+                    <span className="text-xs font-bold text-gray-500">−</span>
                   )}
 
                   <span
@@ -133,7 +127,7 @@ const Marquee = async () => {
                     {convertToBanglaNumber(item.change.pct)}%
                   </span>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
