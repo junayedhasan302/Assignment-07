@@ -28,8 +28,9 @@ export interface IType {
 
 const Marquee = async () => {
   // All products
-  const URL =
-    "https://api.abcz.workers.dev/api/bazardor/products";
+  const URL ="https://api.abcz.workers.dev/api/bazardor/products";
+  // const URL ="https://api.api-store.workers.dev/api/bazardor/products";
+    //  const URL = "https://api.api-store.workers.dev/api/bazardor/products" || "https://api.abcz.workers.dev/api/bazardor/products";
 
   const res = await fetch(URL);
   const data: IType[] = await res.json();

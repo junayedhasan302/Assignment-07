@@ -6,7 +6,7 @@ interface ICategory {
 
 const HeaderCategories = async () => {
   const URL = "https://api.abcz.workers.dev/api/bazardor/categories";
-  // const URL = "https://api.api-store.workers.dev/api/bazardor/categories",
+  // const URL = "https://api.api-store.workers.dev/api/bazardor/categories";
   const res = await fetch(URL);
   const data = await res.json();
 

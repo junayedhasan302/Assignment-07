@@ -17,6 +17,8 @@ const convertToBanglaNumber = (value: number | string) =>
 
 const DownPrice = async () => {
   const URL = "https://api.abcz.workers.dev/api/bazardor/products";
+    // const URL ="https://api.api-store.workers.dev/api/bazardor/products";
+    //  const URL = "https://api.api-store.workers.dev/api/bazardor/products" || "https://api.abcz.workers.dev/api/bazardor/products";
 
   const res = await fetch(URL, { cache: "no-store" });
 
