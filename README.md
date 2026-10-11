@@ -1,6 +1,6 @@
 # 🛒 BazarDor — Market Price Tracker
 
-> A modern, responsive web application built with **Next.js (App Router)**, **Tailwind CSS**, **DaisyUI**, **Better-Auth**, and **TypeScript** to track, compare, and analyze daily essential commodity prices across different markets in Bangladesh.
+> A modern, responsive web application built with **Next.js (App Router)**, **Tailwind CSS**, **Better-Auth**, and **TypeScript** to track, compare, and analyze daily essential commodity prices across different markets in Bangladesh.
 
 ------------------------------------------------------------------------
 
@@ -10,7 +10,7 @@
 
 ## 📖 About The Project
 
-**BazarDor** is a comprehensive market price tracking platform designed to help consumers stay updated with current commodity prices (such as rice, oil, lentils, vegetables, fish, meat, eggs, and spices) across various regions and local markets in Bangladesh. 
+**BazarDor** is a comprehensive market price tracking platform designed to help consumers stay updated with current commodity prices (such as rice, oil, lentils, vegetables, fish, meat, eggs, and spices) across various regions and local markets in Bangladesh.
 
 The application offers an interactive user experience featuring real-time price tickers, dynamic sorting with Bengali numerals, protected route access for product details, seamless multi-provider authentication, profile customization, skeleton loading states, custom error handling, and full responsiveness across all devices.
 
@@ -22,7 +22,7 @@ The application offers an interactive user experience featuring real-time price 
 - **Header & Logo**: Figma-aligned design featuring the app logo and live Bengali date display.
 - **Category Navigation**: Interactive navbar links with active state highlighting for quick filtering.
 - **Marquee Price Ticker**: Infinite scrolling strip displaying real-time commodity updates (emoji, item name, unit price, and price movement percentage).
-- **User Dropdown Menu**: Accessible avatar and name button opening a interactive menu for quick profile access and sign-out.
+- **User Dropdown Menu**: Accessible avatar and name button opening an interactive popup menu for quick profile access and sign-out.
 
 ### 🅱️ 2. Hero Banner & Price Trend Sections
 - **Hero Banner**: Engaging banner with a CTA button that smoothly scrolls down to the **#সব-পণ্য** section.
@@ -32,7 +32,7 @@ The application offers an interactive user experience featuring real-time price 
 
 ### 📦 3. Responsive Product Cards & Protected Details Page
 - **Product Cards**: Shows thumbnail emoji/illustrations, product name, unit label (e.g., প্রতি কেজি, প্রতি ডজন), and pricing with Bengali digits and trend badges (green ▲, red ▼, gray —).
-- **Protected Routing**: Accessing detailed product breakdown pages (`/product/[slug]`) strictly requires user authentication. Unauthenticated users are redirected to the sign-in page with toast notifications.
+- **Protected Routing**: Accessing detailed product breakdown pages (`/product/[slug]`) strictly requires user authentication. Unauthenticated users are redirected appropriately.
 
 ### 📊 4. Category Filtering & Custom Bengali Sorting
 - **Category Filtering**: Filter products dynamically based on categories (e.g., চাল, ডাল, তেল, সবজি, মাছ, মাংস).
@@ -41,7 +41,7 @@ The application offers an interactive user experience featuring real-time price 
 ### 🔐 5. Authentication & Social Login
 - **Better-Auth Integration**: Robust credentials authentication (Email & Password).
 - **Social Authentication**: One-click Sign In and Sign Up via **Google** and **GitHub**.
-- **Interactive Toasts**: Real-time toast notifications for successful sign-in, registration, sign-out, validation errors, and protected route redirects.
+- **Error Handling**: Clear error messages and feedback handling for authentication and validation.
 
 ### 👤 6. Profile Management & Information Update
 - **My Profile Dashboard**: View account details, creation time, and user status.
@@ -61,10 +61,10 @@ The application offers an interactive user experience featuring real-time price 
 | :--- | :--- |
 | **Next.js (App Router)** | Core React framework for SSR, client components, and dynamic routing (`/product/[slug]`) |
 | **React** | Component-driven UI development |
-| **Tailwind CSS & DaisyUI** | Utility-first styling, responsive layouts, and UI components |
+| **Tailwind CSS** | Utility-first styling and fully responsive layouts |
 | **TypeScript** | Type safety and enhanced developer experience |
 | **Better-Auth** | Authentication engine for Email/Password, Google, and GitHub |
-| **React Hot Toast** | Toast notifications for user actions and routing alerts |
+| **React Icons** | Modern icon integration for UI elements |
 
 ------------------------------------------------------------------------
 
