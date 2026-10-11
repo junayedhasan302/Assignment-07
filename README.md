@@ -51,7 +51,7 @@ The application offers an interactive user experience featuring real-time price 
 - **Skeleton Loaders**: Custom loading skeletons rendered during data fetching for smooth user transition.
 - **Custom 404 Page**: Friendly Bengali 404 error page (`not-found`) with a direct CTA button to return home (**"হোম পেজে ফিরে যান"**).
 - **Fully Responsive**: Mobile-first design optimized for mobile phones, tablets, and desktop displays.
-- **Figma-Matched Footer**: Styled footer containing disclaimers and essential project links.
+
 
 ------------------------------------------------------------------------
 
