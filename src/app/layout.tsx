@@ -14,8 +14,8 @@ const hindSiliguri = Hind_Siliguri({
 });
 
 export const metadata: Metadata = {
-  title: "Bazar Dor",
-  description: "Bazar Dor web app",
+  title: "Bajar Dor",
+  description: "Bajar Dor web app",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
