@@ -5,12 +5,13 @@ import { mongodbAdapter } from "@better-auth/mongo-adapter";
 
 import dns from "node:dns";
 
-// DNS Configuration
+// DNS Configuration for 500 error ToT
 dns.setServers(["8.8.8.8", "8.8.4.4", "1.1.1.1"]);
 
 // MongoDB Configuration
 const mongodbUrl = process.env.MONGODB_URL;
 
+// Debugging Subidhar jonno add kora
 if (!mongodbUrl) {
   throw new Error(
     "MONGODB_URL is missing. Please check your environment variables."
