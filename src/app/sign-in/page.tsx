@@ -1,10 +1,11 @@
-
 "use client";
 
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
 
 export default function SignInPage() {
   const router = useRouter();
@@ -36,9 +37,7 @@ export default function SignInPage() {
       });
 
       if (error) {
-        setErrorMessage(
-          error.message || "ইমেইল অথবা পাসওয়ার্ড সঠিক নয়।"
-        );
+        setErrorMessage(error.message || "ইমেইল অথবা পাসওয়ার্ড সঠিক নয়।");
         return;
       }
 
@@ -51,9 +50,7 @@ export default function SignInPage() {
     }
   };
 
-  const handleSocialSignIn = async (
-    provider: "google" | "github"
-  ) => {
+  const handleSocialSignIn = async (provider: "google" | "github") => {
     setErrorMessage("");
     setSocialLoading(provider);
 
@@ -64,9 +61,7 @@ export default function SignInPage() {
       });
 
       if (error) {
-        setErrorMessage(
-          error.message || `${provider} sign in ব্যর্থ হয়েছে।`
-        );
+        setErrorMessage(error.message || `${provider} sign in ব্যর্থ হয়েছে।`);
         setSocialLoading("");
       }
     } catch {
@@ -87,7 +82,7 @@ export default function SignInPage() {
 
           <div className="relative z-10">
             <Link href="/" className="text-2xl font-extrabold tracking-tight">
-              Bazar Dor
+              বাজার দর
             </Link>
             <p className="mt-2 text-sm text-white/80">
               আপনার বাজার, আপনার হিসাব।
@@ -100,8 +95,8 @@ export default function SignInPage() {
               বাজারের দামের আপডেট থাকুক আপনার হাতেই।
             </h1>
             <p className="mt-4 leading-7 text-white/85">
-              পণ্যের দাম দেখুন, পরিবর্তন বুঝুন এবং আপনার
-              বাজারের সিদ্ধান্ত নিন আরও সহজে।
+              পণ্যের দাম দেখুন, পরিবর্তন বুঝুন এবং আপনার বাজারের সিদ্ধান্ত নিন
+              আরও সহজে।
             </p>
           </div>
 
@@ -115,14 +110,14 @@ export default function SignInPage() {
           <div className="w-full max-w-md">
             <Link
               href="/"
-              className="inline-block text-xl font-extrabold text-[#FC3F33] md:hidden"
+              className="inline-block text-xl font-extrabold text-[#19b526] md:hidden"
             >
-              Bazar Dor
+              বাজার দর
             </Link>
 
             <div className="mb-8 mt-5 md:mt-0">
               <p className="text-sm font-semibold uppercase tracking-widest text-[#19b526]">
-                Welcome Back
+                স্বাগতম
               </p>
               <h2 className="mt-2 text-3xl font-bold text-gray-900 sm:text-4xl">
                 সাইন ইন করুন
@@ -205,9 +200,7 @@ export default function SignInPage() {
 
             <div className="my-6 flex items-center gap-4">
               <div className="h-px flex-1 bg-gray-200" />
-              <span className="text-xs font-medium text-gray-400">
-                অথবা
-              </span>
+              <span className="text-xs font-medium text-gray-400">অথবা</span>
               <div className="h-px flex-1 bg-gray-200" />
             </div>
 
@@ -218,10 +211,10 @@ export default function SignInPage() {
                 onClick={() => handleSocialSignIn("google")}
                 className="flex items-center justify-center gap-2 rounded-xl border border-gray-300 px-4 py-3 text-sm font-semibold text-gray-700 transition hover:bg-gray-50 disabled:opacity-60"
               >
-                <span className="font-bold text-base">G</span>
-                {socialLoading === "google"
-                  ? "অপেক্ষা করুন..."
-                  : "Google"}
+                <span className="text-lg">
+                  <FcGoogle />
+                </span>
+                {socialLoading === "google" ? "অপেক্ষা করুন..." : "Google"}
               </button>
 
               <button
@@ -230,10 +223,10 @@ export default function SignInPage() {
                 onClick={() => handleSocialSignIn("github")}
                 className="flex items-center justify-center gap-2 rounded-xl border border-gray-300 px-4 py-3 text-sm font-semibold text-gray-700 transition hover:bg-gray-50 disabled:opacity-60"
               >
-                <span className="font-bold text-base">GH</span>
-                {socialLoading === "github"
-                  ? "অপেক্ষা করুন..."
-                  : "GitHub"}
+                <span className="text-lg">
+                  <FaGithub />
+                </span>
+                {socialLoading === "github" ? "অপেক্ষা করুন..." : "GitHub"}
               </button>
             </div>
 

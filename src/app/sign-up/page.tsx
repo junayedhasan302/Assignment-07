@@ -1,10 +1,11 @@
-
 "use client";
 
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -67,9 +68,7 @@ export default function SignUpPage() {
       });
 
       if (error) {
-        setErrorMessage(
-          error.message || "অ্যাকাউন্ট তৈরি করা যায়নি।"
-        );
+        setErrorMessage(error.message || "অ্যাকাউন্ট তৈরি করা যায়নি।");
         return;
       }
 
@@ -82,9 +81,7 @@ export default function SignUpPage() {
     }
   };
 
-  const handleSocialSignUp = async (
-    provider: "google" | "github"
-  ) => {
+  const handleSocialSignUp = async (provider: "google" | "github") => {
     setErrorMessage("");
     setSocialLoading(provider);
 
@@ -95,9 +92,7 @@ export default function SignUpPage() {
       });
 
       if (error) {
-        setErrorMessage(
-          error.message || `${provider} sign up ব্যর্থ হয়েছে।`
-        );
+        setErrorMessage(error.message || `${provider} sign up ব্যর্থ হয়েছে।`);
         setSocialLoading("");
       }
     } catch {
@@ -128,11 +123,11 @@ export default function SignUpPage() {
           <div className="relative z-10 py-12">
             <span className="text-5xl">🛍️</span>
             <h1 className="mt-6 text-3xl font-bold leading-snug lg:text-4xl">
-              Bazar Dor-এর সঙ্গে স্মার্ট বাজার শুরু করুন।
+              বাজার দর-এর সঙ্গে স্মার্ট বাজার শুরু করুন।
             </h1>
             <p className="mt-4 leading-7 text-white/85">
-              একটি অ্যাকাউন্ট তৈরি করুন এবং পণ্যের দামের
-              আপডেট ও বিস্তারিত আরও সহজে দেখুন।
+              একটি অ্যাকাউন্ট তৈরি করুন এবং পণ্যের দামের আপডেট ও বিস্তারিত আরও
+              সহজে দেখুন।
             </p>
           </div>
 
@@ -214,9 +209,7 @@ export default function SignUpPage() {
                   className="mb-2 block text-sm font-semibold text-gray-700"
                 >
                   Profile Image URL{" "}
-                  <span className="font-normal text-gray-400">
-                    (ঐচ্ছিক)
-                  </span>
+                  <span className="font-normal text-gray-400">(ঐচ্ছিক)</span>
                 </label>
                 <input
                   id="image"
@@ -278,9 +271,7 @@ export default function SignUpPage() {
                   />
                   <button
                     type="button"
-                    onClick={() =>
-                      setShowConfirmPassword(!showConfirmPassword)
-                    }
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-semibold text-gray-500 hover:text-[#FC3F33]"
                   >
                     {showConfirmPassword ? "লুকান" : "দেখুন"}
@@ -291,20 +282,20 @@ export default function SignUpPage() {
               <button
                 type="submit"
                 disabled={isBusy}
-                className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#19b526] px-4 py-3.5 font-bold text-white shadow-md shadow-red-200 transition hover:bg-green-600 disabled:cursor-not-allowed disabled:opacity-60"
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#19b526] px-4 py-3.5 font-bold text-white shadow-md shadow-green-200 transition hover:bg-green-600 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {isLoading && (
                   <span className="h-5 w-5 animate-spin rounded-full border-2 border-white/40 border-t-white" />
                 )}
-                {isLoading ? "অ্যাকাউন্ট তৈরি হচ্ছে..." : "অ্যাকাউন্ট তৈরি করুন"}
+                {isLoading
+                  ? "অ্যাকাউন্ট তৈরি হচ্ছে..."
+                  : "অ্যাকাউন্ট তৈরি করুন"}
               </button>
             </form>
 
             <div className="my-6 flex items-center gap-4">
               <div className="h-px flex-1 bg-gray-200" />
-              <span className="text-xs font-medium text-gray-400">
-                অথবা
-              </span>
+              <span className="text-xs font-medium text-gray-400">অথবা</span>
               <div className="h-px flex-1 bg-gray-200" />
             </div>
 
@@ -315,10 +306,10 @@ export default function SignUpPage() {
                 onClick={() => handleSocialSignUp("google")}
                 className="flex items-center justify-center gap-2 rounded-xl border border-gray-300 px-4 py-3 text-sm font-semibold text-gray-700 transition hover:bg-gray-50 disabled:opacity-60"
               >
-                <span className="font-bold text-base">G</span>
-                {socialLoading === "google"
-                  ? "অপেক্ষা করুন..."
-                  : "Google"}
+                <span className="text-lg">
+                  <FcGoogle />
+                </span>
+                {socialLoading === "google" ? "অপেক্ষা করুন..." : "Google"}
               </button>
 
               <button
@@ -327,10 +318,10 @@ export default function SignUpPage() {
                 onClick={() => handleSocialSignUp("github")}
                 className="flex items-center justify-center gap-2 rounded-xl border border-gray-300 px-4 py-3 text-sm font-semibold text-gray-700 transition hover:bg-gray-50 disabled:opacity-60"
               >
-                <span className="font-bold text-base">GH</span>
-                {socialLoading === "github"
-                  ? "অপেক্ষা করুন..."
-                  : "GitHub"}
+                <span className="text-lg">
+                  <FaGithub />
+                </span>
+                {socialLoading === "github" ? "অপেক্ষা করুন..." : "GitHub"}
               </button>
             </div>
 
@@ -338,14 +329,14 @@ export default function SignUpPage() {
               আগে থেকেই অ্যাকাউন্ট আছে?{" "}
               <Link
                 href="/sign-in"
-                className="font-bold text-[#FC3F33] hover:underline"
+                className="font-bold text-[#19b526] hover:underline"
               >
                 সাইন ইন করুন
               </Link>
             </p>
 
             <p className="mt-5 text-center text-xs text-gray-400">
-              <Link href="/" className="hover:text-[#FC3F33]">
+              <Link href="/" className="hover:text-[#19b526]">
                 ← হোম পেজে ফিরে যান
               </Link>
             </p>
