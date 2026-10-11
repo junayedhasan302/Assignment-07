@@ -1,4 +1,4 @@
-# 🛒 BazarDor — Market Price Tracker
+# 🛒 BajarDor — Market Price Tracker
 
 > A modern, responsive web application built with **Next.js (App Router)**, **Tailwind CSS**, **Better-Auth**, and **TypeScript** to track, compare, and analyze daily essential commodity prices across different markets in Bangladesh.
 
@@ -10,7 +10,7 @@
 
 ## 📖 About The Project
 
-**BazarDor** is a comprehensive market price tracking platform designed to help consumers stay updated with current commodity prices (such as rice, oil, lentils, vegetables, fish, meat, eggs, and spices) across various regions and local markets in Bangladesh.
+**BajarDor** is a comprehensive market price tracking platform designed to help consumers stay updated with current commodity prices (such as rice, oil, lentils, vegetables, fish, meat, eggs, and spices) across various regions and local markets in Bangladesh.
 
 The application offers an interactive user experience featuring real-time price tickers, dynamic sorting with Bengali numerals, protected route access for product details, seamless multi-provider authentication, profile customization, skeleton loading states, custom error handling, and full responsiveness across all devices.
 
@@ -70,7 +70,7 @@ The application offers an interactive user experience featuring real-time price 
 
 ## 🧠 Technical Highlights & Learning Outcomes
 
-While building BazarDor, key architectural and functional concepts implemented include:
+While building BajarDor, key architectural and functional concepts implemented include:
 - Securing dynamic client/server routes with middleware and session management using **Better-Auth**.
 - Developing custom array sorting algorithms capable of handling Bengali numeric characters (`০-৯`).
 - Structuring fallback states using Next.js `not-found` handlers and suspense skeletons.
