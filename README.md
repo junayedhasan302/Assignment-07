@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛒 BazarDor — Market Price Tracker
 
-## Getting Started
+> A modern, responsive web application built with **Next.js (App Router)**, **Tailwind CSS**, **DaisyUI**, **Better-Auth**, and **TypeScript** to track, compare, and analyze daily essential commodity prices across different markets in Bangladesh.
 
-First, run the development server:
+------------------------------------------------------------------------
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🌐 Live Demo: https://damkoto-sable.vercel.app/
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+------------------------------------------------------------------------
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📖 About The Project
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**BazarDor** is a comprehensive market price tracking platform designed to help consumers stay updated with current commodity prices (such as rice, oil, lentils, vegetables, fish, meat, eggs, and spices) across various regions and local markets in Bangladesh. 
 
-## Learn More
+The application offers an interactive user experience featuring real-time price tickers, dynamic sorting with Bengali numerals, protected route access for product details, seamless multi-provider authentication, profile customization, skeleton loading states, custom error handling, and full responsiveness across all devices.
 
-To learn more about Next.js, take a look at the following resources:
+------------------------------------------------------------------------
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ✨ Key Features & Implementations
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 🔝 1. Dynamic Navbar & Live Ticker
+- **Header & Logo**: Figma-aligned design featuring the app logo and live Bengali date display.
+- **Category Navigation**: Interactive navbar links with active state highlighting for quick filtering.
+- **Marquee Price Ticker**: Infinite scrolling strip displaying real-time commodity updates (emoji, item name, unit price, and price movement percentage).
+- **User Dropdown Menu**: Accessible avatar and name button opening a interactive menu for quick profile access and sign-out.
 
-## Deploy on Vercel
+### 🅱️ 2. Hero Banner & Price Trend Sections
+- **Hero Banner**: Engaging banner with a CTA button that smoothly scrolls down to the **#সব-পণ্য** section.
+- **Section A — "আজ দাম বেড়েছে ▲"**: Highlights top price risers with green trend badges.
+- **Section B — "আজ দাম কমেছে ▼"**: Highlights top price fallers with red trend badges.
+- **Section C — "সব পণ্য"**: Comprehensive grid displaying all market products.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 📦 3. Responsive Product Cards & Protected Details Page
+- **Product Cards**: Shows thumbnail emoji/illustrations, product name, unit label (e.g., প্রতি কেজি, প্রতি ডজন), and pricing with Bengali digits and trend badges (green ▲, red ▼, gray —).
+- **Protected Routing**: Accessing detailed product breakdown pages (`/product/[slug]`) strictly requires user authentication. Unauthenticated users are redirected to the sign-in page with toast notifications.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 📊 4. Category Filtering & Custom Bengali Sorting
+- **Category Filtering**: Filter products dynamically based on categories (e.g., চাল, ডাল, তেল, সবজি, মাছ, মাংস).
+- **Advanced Sorting ("সাজান")**: Custom sorting control (Default, Price: Low to High, Price: High to Low) engineered to parse and sort Bengali numeric values accurately.
+
+### 🔐 5. Authentication & Social Login
+- **Better-Auth Integration**: Robust credentials authentication (Email & Password).
+- **Social Authentication**: One-click Sign In and Sign Up via **Google** and **GitHub**.
+- **Interactive Toasts**: Real-time toast notifications for successful sign-in, registration, sign-out, validation errors, and protected route redirects.
+
+### 👤 6. Profile Management & Information Update
+- **My Profile Dashboard**: View account details, creation time, and user status.
+- **Profile Edit Feature**: Seamless update form allowing users to update their display name and profile avatar image URL.
+
+### 🎨 7. Enhanced Responsive Design & User Experience
+- **Skeleton Loaders**: Custom loading skeletons rendered during data fetching for smooth user transition.
+- **Custom 404 Page**: Friendly Bengali 404 error page (`not-found`) with a direct CTA button to return home (**"হোম পেজে ফিরে যান"**).
+- **Fully Responsive**: Mobile-first design optimized for mobile phones, tablets, and desktop displays.
+- **Figma-Matched Footer**: Styled footer containing disclaimers and essential project links.
+
+------------------------------------------------------------------------
+
+## 🛠️ Technologies Used
+
+| Technology | Purpose |
+| :--- | :--- |
+| **Next.js (App Router)** | Core React framework for SSR, client components, and dynamic routing (`/product/[slug]`) |
+| **React** | Component-driven UI development |
+| **Tailwind CSS & DaisyUI** | Utility-first styling, responsive layouts, and UI components |
+| **TypeScript** | Type safety and enhanced developer experience |
+| **Better-Auth** | Authentication engine for Email/Password, Google, and GitHub |
+| **React Hot Toast** | Toast notifications for user actions and routing alerts |
+
+------------------------------------------------------------------------
+
+## 🧠 Technical Highlights & Learning Outcomes
+
+While building BazarDor, key architectural and functional concepts implemented include:
+- Securing dynamic client/server routes with middleware and session management using **Better-Auth**.
+- Developing custom array sorting algorithms capable of handling Bengali numeric characters (`০-৯`).
+- Structuring fallback states using Next.js `not-found` handlers and suspense skeletons.
+- Ensuring zero reload errors on dynamic routes after deployment on Vercel.
+
+------------------------------------------------------------------------
+
+**BY: Junayed Hasan**
+
+- 🎓 CSE Student — Bangladesh University of Business & Technology (BUBT)
+- 📞 01789042515
+- 📧 junayedhasan302@gmail.com
+- 🆔 WEB14-0687
